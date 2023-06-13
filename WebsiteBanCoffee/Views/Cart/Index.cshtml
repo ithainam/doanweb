@@ -1,0 +1,229 @@
+﻿@model WebsiteBanCoffee.Models.ViewModels.ShoppingCartVM
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="background-color:rgba(255,255,255,0.85)">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <form method="post">
+            <br />
+            <div class="container">
+                <div class="card">
+                    <div class="card-header bg-dark text-light ml-0">
+                        <div class="row">
+                            <div class="col-6 pt-2">
+                                <i class="fa fa-shopping-cart"></i> &nbsp; <p class="hover-underline-animation" style="font-size: 1.5em; font-weight: 800; line-height: 2em">Shopping Cart</p>
+                            </div>
+                            <div class="col-6 text-end" style=" display: flex; justify-content: space-between; align-items: center; margin-bottom: 0;">
+                                <a href="/Product" class="animated-border-button">Continue Shopping</a>
+                                <a href="/Cart/ClearShoppingCart" class="animated-border-button" style="background-color: red">Clear Shopping</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        @if (ViewBag.ListCount == 0)
+                        {
+                            <h2 style="color: brown">Chưa có sản phẩm</h2>
+                        }
+                        else
+                        {
+                            foreach (var item in Model.ListCart.ToList())
+                            {
+                                <div class="site-section">
+                                    <div class="container">
+                                        <div class="row mb-3">
+                                            <div class="site-blocks-table" style="width: 100%">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr style="text-align: center">
+                                                            <th class="product-thumbnail" style="text-align: center">Image</th>
+                                                            <th class="product-name" style="text-align: center">Product</th>
+                                                            <th class="product-price" style="text-align: center">Price</th>
+                                                            <th class="product-quantity" style="width: 200px; text-align: center">Quantity</th>
+                                                            <th class="product-total" style="text-align: center">Size</th>
+                                                            <th class="product-total" style="text-align: center">Total</th>
+                                                            <th class="product-remove" style="text-align: center">Remove</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="product-thumbnail" style="display: flex; justify-content: center;">
+                                                                <img src="@item.Product.image"
+                                                                     alt="Image"
+                                                                     class="img-fluid"
+                                                                     width="120px" />
+                                                            </td>
+                                                            <td class="product-name">
+                                                                <h2 class="h5 text-black text-center">
+                                                                    @item.Product.name
+                                                                </h2>
+                                                            </td>
+                                                            <td class="text-center">@item.Product.sellPrice</td>
+                                                            <td>
+                                                                <div class="input-group"
+                                                                     style="max-width: 120px; margin: auto">
+                                                                    <div class="w-100 btn-group "
+                                                                         role="group">
+                                                                        <a class="btn btn-warning"
+                                                                           href="/Cart/Minus?cartId=@item.Id">
+                                                                            <i class="bi bi-dash-square">-</i>
+                                                                        </a>
+
+                                                                        <strong class=" m-auto pr-2" style="position: absolute; right: -30px; top: 7px;">
+                                                                            <span class="text-muted">&nbsp;x&nbsp;</span>@item.Count
+                                                                        </strong>
+
+                                                                        <a class="btn btn-primary"
+                                                                           href="/Cart/Plus?cartId=@item.Id">
+                                                                            <i class="bi bi-plus-square">+</i>
+                                                                        </a>
+                                                                        &nbsp;
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                            <td class="text-center" style="width: 100px">@item.SizeName<br />@item.SizePrice VND</td>
+                                                            <td class="text-center" style="width: 100px">@item.Price</td>
+                                                            <td>
+                                                                <div style="max-width: 120px; margin: auto;">
+                                                                    <a href="/Cart/Remove?cartId=@item.Id"
+                                                                       class="btn btn-danger height-auto btn-sm"
+                                                                       style="margin: auto; width: 100%;">Remove</a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                        }
+                        <div class="row" style="margin-top: 20px; width: 100%; display: flex; flex-direction: row-reverse;">
+                            <div class="col-12 col-md-6 offset-md-6 col-lg-4 offset-lg-8 pr-4">
+                                <ul class="list-group">
+                                    <li class="list-group-item bg-light">
+                                        <span class="text-info"> Total (VND)</span>
+                                        @if (ViewBag.ListCount == 0)
+                                        {
+                                            <strong class="text-info">0 VND</strong>
+                                        }
+                                        else
+                                        {
+                                            <strong class="text-info">@Model.Order.OrderTotal.ToString("") VND</strong>
+                                        }
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-footer" style="margin-top: 0.8em;">
+                        <div class="card-footer row">
+                            <div class="col-sm-12 col-lg-4 col-md-6 offset-lg-8 offset-md-6" style=" width: 100%; display: flex; flex-direction: row-reverse;">
+                                @*<a href="/Cart/Summary" class="btn btn-success form-control">Summary</a>*@
+                                @*@Html.ActionLink("Summary", "Summary")*@
+                                <a href="/Cart/Summary" style="width: 410px; text-align: center" class="button-summary">Summary</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+
+
+
+    }
+</div>
+
+
+
+
+<style>
+    .button-summary {
+        color: #65b5f6;
+        background-color: #23FDAD;
+        border: 1px solid #65b5f6;
+        border-radius: 4px;
+        padding: 4px 16px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        width: 100%;
+    }
+
+        .button-summary:hover {
+            transform: scale(0.8);
+        }
+
+
+    .animated-border-button {
+        background-color: palegreen;
+        border: none;
+        color: #ffffff;
+        outline: none;
+        padding: 12px 40px 10px;
+        position: relative;
+    }
+
+        .animated-border-button:hover a {
+            text-transform: none;
+        }
+
+        .animated-border-button::before,
+        .animated-border-button::after {
+            border: 0 solid transparent;
+            transition: all 0.3s;
+            content: '';
+            height: 0;
+            position: absolute;
+            width: 24px;
+        }
+
+        .animated-border-button::before {
+            border-top: 2px solid #263059;
+            right: 0;
+            top: -4px;
+        }
+
+        .animated-border-button::after {
+            border-bottom: 2px solid #263059;
+            bottom: -4px;
+            left: 0;
+        }
+
+        .animated-border-button:hover::before,
+        .animated-border-button:hover::after {
+            width: 100%;
+        }
+
+    .hover-underline-animation {
+        display: inline-block;
+        position: relative;
+        color: #0087ca;
+    }
+
+        .hover-underline-animation::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #0087ca;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        .hover-underline-animation:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+</style>

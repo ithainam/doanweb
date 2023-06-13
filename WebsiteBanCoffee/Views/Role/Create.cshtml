@@ -1,0 +1,17 @@
+﻿@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+@{
+    ViewBag.Title = "Create";
+}
+<div class="section-padding" style="background-color: rgba(255,255,255,0.5)">
+    <h2>Tạo Quyền</h2>
+    @using (Html.BeginForm())
+    {
+        <table class="table table-bordered table-hover">
+            <tr>
+                <td>Nhập Tên Quyền:</td>
+                <td>@Html.EditorFor(m => m.Name)</td>
+            </tr>
+        </table>
+        <input type="submit" value="Tạo Quyền" />
+    }
+</div>

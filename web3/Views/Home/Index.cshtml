@@ -1,0 +1,63 @@
+﻿@using web3.Models;
+@model List<Sach>
+<link href="~/Content/TrangChu.css" rel="stylesheet" />
+@{
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+    ViewBag.Title = "Index";
+}
+
+<div id="body" style="margin-left:10px">
+    @{ int i = 0;}
+    @foreach (var items in Model)
+    {
+        i++;
+        <div id="SanPham">
+            <a href="@Url.Action("XemChiTiet", "Sach", new {@MaSach=items.IDSach})">  <div id="AnhBia"><img src="@Url.Content("~/images2/"+items.AnhBia)" width="100" height="150" /></div></a>
+            <div id="ThongTin">
+                    @if (items.Mota.Length < 35)
+                    {
+                        <div id="TenSach" title="@items.TenSach">@items.Mota</div>
+                    }
+                    else
+                    {
+                        <div id="TenSach" title="@items.TenSach">@items.Mota.Substring(0, 35)...</div>
+                    }
+                </div>
+
+            <div id="DonGIa" style="font-size:20px; color:red">Giá: @items.Gia VND</div>
+            <div id="ChucNang">
+                @*<div id="GioHang">
+                    @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMaSach = items.IDSach, @strURL = Request.Url.ToString() }))
+                    {
+                        <input type="submit" value="Mua" id="btnGioHang" class="btn btn-primary" />
+
+                    }
+
+                </div>*@
+                <div id="Doc">
+                    @using (Html.BeginForm("Xemtruyen", "Sach", new { @id = items.IDSach, @strURL = Request.Url.ToString() }))
+                    {
+                        <input type="submit" value="đọc" id="btnDoc" class="btn btn-primary" />
+
+                    }
+                </div>
+                <div id="Sua">
+                    @using (Html.BeginForm("Suatruyen", "Sach", new { @id = items.IDSach, @strURL = Request.Url.ToString() }))
+                    {
+                        <input type="submit" value="sửa" id="btnSua" class="btn btn-primary" />
+
+                    }
+                </div>
+            </div>
+
+        </div>
+        if (i % 5 == 0)
+        {
+            <div style="clear:both"></div>
+        }
+
+    }
+
+</div>
+<div style="clear:both"></div>
+@*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@

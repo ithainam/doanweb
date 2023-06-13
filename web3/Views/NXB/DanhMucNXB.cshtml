@@ -1,0 +1,13 @@
+﻿@using web3.Models;
+@model List<NXB>
+@{
+    ViewBag.Title = "DanhMucNXB";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+
+<h2>DanhMucNXB</h2>
+@foreach (var items in Model)
+{
+    <a href="@Url.Action("SachTheoNXB",new {MaNXB=items.IDNXB})" class="button button-submit">@items.TenNXB</a>
+    <br />
+}

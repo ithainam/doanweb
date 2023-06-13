@@ -1,0 +1,196 @@
+﻿@model WebsiteBanCoffee.Models.ViewModels.ShoppingCartVM
+
+@{
+    ViewBag.Title = "Summary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div style="background-color: rgba(255,255,255,0.85)">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <form method="post">
+            <br />
+            <div class="container">
+                <div class="card">
+                    <div class="card-header bg-dark text-light ml-0">
+                        <div class=" row container" style=" display: flex; flex-direction: row; justify-content: space-between;">
+                            <div class="col-6">
+                                <i class="fa fa-shopping-cart"></i> &nbsp;
+                                <p class="hover-underline-animation" style="font-size: 1.5em; font-weight: 800; line-height: 2em; margin-bottom: 1em;">Order Summary</p>
+
+                            </div>
+                            <div class="col-6 text-end">
+                                @*<a asp-action="Index" class="btn btn-outline-info btn-sm">Back to Cart</a>*@
+                                @*<a href="/Cart/Index" class="btn btn-outline-info btn-sm">Back to Cart</a>*@
+                                @*<button class="animated-border-button"><a href="/Cart/Index" class="btn btn-outline-info btn-sm ">Back to Cart</a></button>*@
+                                <a href="/Cart/Index" class="animated-border-button">Back to Cart</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="container rounded p-2">
+                            <div class="row" style="">
+                                <div class="col-12 col-lg-6 pb-4" style=" display: flex; flex-direction: column; justify-content: space-around; gap: 5px 0px;">
+                                    <div class="row">
+                                        <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                            <span class="text-info">Shipping Details:</span>
+                                        </h4>
+                                    </div>
+                                    <div class="row my-3">
+                                        <div class="col-3">
+                                            <label>Name</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input name="Order.Name" value="@Model.Order.ApplicationUser.FullName" class="form-control" />
+                                            @*<input name="Order.Name" class="form-control" />*@
+                                        </div>
+                                    </div>
+                                    <div class="row my-3">
+                                        <div class="col-3">
+                                            <label>Phone</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input name="Order.PhoneNumber" value="@Model.Order.ApplicationUser.PhoneNumber" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row my-3">
+                                        <div class="col-3">
+                                            <label>Street Address</label>
+                                        </div>
+                                        <div class="col-9">
+                                            <input name="Order.StreetAddress" value="@Model.Order.ApplicationUser.Address" class="form-control" />
+                                            @*<input name="Order.StreetAddress" class="form-control" />*@
+                                        </div>
+                                    </div>
+                                    <div class="row my-3">
+                                        <div class="col-3">
+                                            <label>City</label>
+                                        </div>
+                                        <div class="col-9">
+                                            @*<input name="Order.City" value="@Model.Order.ApplicationUser.City" class="form-control" />*@
+                                            <input name="Order.City" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <div class="row my-3">
+                                        <div class="col-3">
+                                            <label>State</label>
+                                        </div>
+                                        <div class="col-9">
+                                            @*<input name="Order.State" value="@Model.Order.ApplicationUser.State" class="form-control" />*@
+                                            <input name="Order.State" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-5 offset-lg-1">
+                                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="text-info">Order Summary:</span>
+                                    </h4>
+                                    <ul class="list-group mb-3">
+                                        @foreach (var details in Model.ListCart.ToList())
+                                        {
+                                            <li class="list-group-item d-flex justify-content-between align-items-center" style="">
+                                                <div>
+                                                    <h6 class="my-0">@details.Product.name</h6>
+                                                    <small class="text-muted">Quantity: @details.Count</small> <br />
+                                                    <small class="text-muted">Size: @details.SizeName</small>
+                                                </div>
+                                                <h5 style="display: flex; justify-content: space-between">
+                                                    <strong>Price: </strong> <span class="text-muted" style="font-weight: 600; color: blueviolet;"> @(details.Price.ToString()) VND </span>
+                                                </h5>
+                                            </li>
+                                        }
+                                        <hr />
+                                        <li class="list-group-item d-flex justify-content-between bg-light" style="font-size: 1.3em; display: flex; justify-content: space-between; align-items: center;">
+                                            <small class="text-info">Total (VND)</small>
+                                            <strong class="text-info" style="color: deeppink">@Model.Order.OrderTotal.ToString() VND</strong>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer" style="margin-top: 2em">
+                        <div class="row">
+                            <div class="col-12 col-md-8 pt-2">
+                                <p style="color:maroon; font-size:14px;">
+                                    Estimate Arrival Date:
+                                    @DateTime.Now.AddDays(7).ToShortDateString() - @DateTime.Now.AddDays(14).ToShortDateString()
+                                </p>
+                            </div>
+                            <div class="col-12 col-md-4">
+                                <button type="submit" value="Place Order" class="btn btn-primary form-control">Place Order</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    }
+</div>
+<style>
+    .hover-underline-animation {
+        display: inline-block;
+        position: relative;
+        color: #0087ca;
+    }
+
+        .hover-underline-animation::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #0087ca;
+            transform-origin: bottom right;
+            transition: transform 0.25s ease-out;
+        }
+
+        .hover-underline-animation:hover::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+    .animated-border-button {
+        background-color: palegreen;
+        border: none;
+        color: #ffffff;
+        outline: none;
+        /*padding: 12px 40px 10px;*/
+        padding: 8px 60px 9px;
+        position: relative;
+    }
+
+        .animated-border-button:hover a {
+            text-transform: none;
+        }
+
+        .animated-border-button::before,
+        .animated-border-button::after {
+            border: 0 solid transparent;
+            transition: all 0.3s;
+            content: '';
+            height: 0;
+            position: absolute;
+            width: 24px;
+        }
+
+        .animated-border-button::before {
+            border-top: 2px solid #263059;
+            right: 0;
+            top: -4px;
+        }
+
+        .animated-border-button::after {
+            border-bottom: 2px solid #263059;
+            bottom: -4px;
+            left: 0;
+        }
+
+        .animated-border-button:hover::before,
+        .animated-border-button:hover::after {
+            width: 100%;
+        }
+</style>

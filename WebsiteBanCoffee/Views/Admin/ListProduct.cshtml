@@ -1,0 +1,99 @@
+﻿@model IEnumerable<WebsiteBanCoffee.Models.Product>
+@{
+    Layout = null;
+}
+<h2 class="row">Danh sách sản phẩm</h2>
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+        <a href="@Url.Action("CreateProduct","Admin")" class="btn btn-success">Thêm sản phẩm</a>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 pull-right">
+        @*@Html.DropDownList("Cate", new SelectList(ViewBag.Cate, "Id", "Name"), new {@class = "custom-dropdownlist"})*@
+        <select class="form-control custom-dropdownlist" id="CateDropdownlist" name="Cate" onchange="LoadData()">
+            @foreach (var item in ViewBag.Cate)
+            {
+                <option value="@item.Id">
+                    @item.name
+                </option>
+            }
+        </select>
+    </div>
+</div>
+
+@Html.Partial("SideNavBar")
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                <div class="panel panel-default">
+                    <div class="panel panel-heading edit-text">
+                        @item.name
+                        @if (item.isDisplay)
+                        {
+                            <button type="button" class="btn btn-danger" id="btn_@item.Id" onclick="productDisplay(@item.Id)">Ẩn</button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-success" id="btn_@item.Id" onclick="productDisplay(@item.Id)">Hiển thị</button>
+                        }
+                        @Html.ActionLink("Chỉnh sửa", "EditProduct", new { id = item.Id }, new { @class = "pull-right" })
+                    </div>
+                    <div class="panel-body">
+                        <p><img src="/@item.image" alt="thumbnail" height=300px, width=300px /></p>
+                    </div>
+                    <div class="panel-footer clearfix">
+                        <div class="pull-right">
+                            @Html.ActionLink("Chi tiết", "ProductDetails", new { id = item.Id }, new { @class = "btn btn-default" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+
+<style>
+    .row {
+        margin: 20px 150px 20px 150px;
+    }
+
+    .custom-dropdownlist {
+        margin-top: 20px;
+        font-size: 20px;
+    }
+
+    .edit-text {
+        font-size: 16px;
+        font-weight: bold;
+    }
+</style>
+
+<script>
+    function productDisplay(btnId) {
+        var button = document.getElementById("btn_" + btnId);
+        if (button != null) {
+            if (button.classList.contains("btn-danger")) {
+                button.classList.remove("btn-danger");
+                button.classList.add("btn-success");
+                button.innerText = "Hiển thị";
+            }
+            else {
+                button.classList.remove("btn-success");
+                button.classList.add("btn-danger");
+                button.innerText = "Ẩn";
+            }
+        }
+        else {
+            alert("Thao tác thực hiện không thành công");
+        }
+    }
+</script>
+
+<script>
+    function loadData() {
+        alert("Hello");
+    }
+</script>

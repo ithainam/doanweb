@@ -1,0 +1,21 @@
+﻿@using web3.Models;
+@model Sach
+@{
+    ViewBag.Title = "XemChiTiet";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+<div><img src="@Url.Content("~/images2/"+Model.AnhBia)" /></div>
+<div>Ten sach: @Model.TenSach</div>
+<div>Chu De: @ViewBag.TenChuDe</div>
+<div>Nha Xuat Ban: @ViewBag.NXB</div>
+<div>Thong tin:@Model.Mota</div>
+<div>Gia:@Model.Gia VND</div>
+@using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMaSach = Model.IDSach, @strURL = Request.Url.ToString() }))
+{
+    <input type="submit" value="Mua" id="btnGioHang" class="btn btn-primary" />
+
+}
+
+
+
+

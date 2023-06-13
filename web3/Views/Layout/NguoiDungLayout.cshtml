@@ -1,0 +1,149 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/NguoiDungCssLayout/fonts.css" rel="stylesheet" />
+    <link href="~/Content/NguoiDungCssLayout/NguoiDungCssLayout.css" rel="stylesheet" />
+    <link href="~/Content/NguoiDungCssLayout/screen.css" rel="stylesheet" />
+    <link href="~/Content/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/NivoSlider/nivo-slider.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/NivoSlider/jquery.nivo.slider.js"></script>
+    <script src="~/NivoSlider/jquery.nivo.slider.pack.js"></script>
+
+
+
+</head>
+<body>
+
+
+    <div id="ToanTrang">
+        <section class="blank">
+            <div class="flash">
+                <div class="icDienThoai"><i class="fa fa-phone" aria-hidden="true"></i>My phone number *************</div>
+                @Html.Action("GioHangPartial", "GioHang")
+
+            </div>
+
+
+            <div class="flash success" id="divDanhMuc">
+
+
+                @*<ul class="navMenu">
+                        <li>
+                            <a href="@Url.Action("Index","Home")">Trang Chủ</a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Index","QLSP")">Quản Lý Sản Phẩm</a>
+                        </li>
+                        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+
+                    </ul>*@
+
+                @*@if (Request.IsAuthenticated)
+                    {*@
+                @*using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                    {
+                        @Html.AntiForgeryToken()*@
+
+                <ul class="navMenu">
+                    <li>
+                        <a href="@Url.Action("Index","Home")">Trang Chủ</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("Index","QLSP")">Quản Lý Sản Phẩm</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("MyProfile","Account")">My Profile</a>
+                    </li>
+                    <li><a href="@Url.Action("Login","Account")">Back</a></li>
+                    <
+
+                </ul>
+
+
+                @*//}*@
+                <!--}-->
+
+
+
+            </div>
+        </section>
+
+        <section>
+            <div id="menuleft">
+                <div class="activity">
+                    @Html.Action("SachMoiPartial", "Sach")
+
+                </div>
+            </div>
+            <div id="slider" class="nivoSlider">
+                <img src="~/images2/tetetete.jpg" />
+                <img src="~/images2/Yomawari_Night_Alone.jpg" />
+            </div>
+            <div style="clear:both">
+            </div>
+        </section>
+        <div id="NoiDung">
+            @RenderBody()
+        </div>
+        <section>
+            <div>
+                @Html.Action("ChuDePartial", "ChuDe")
+
+
+            </div>
+
+
+        </section>
+
+        <section class="blank items">
+            <div id="left">
+                <div class="item">
+
+
+                    <div class="item-info">
+                        <h1>NXB</h1>
+                        @Html.Action("NXBPartial", "NXB")
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div style="clear:both"></div>
+        </section>
+    </div>
+    <script type="text/javascript">
+        $(window).on('load', function () {
+
+            $('#slider').nivoSlider({
+                effect: 'fold', // Specify sets like: 'fold,fade,sliceDown'
+                animSpeed: 500, // Slide transition speed
+                pauseTime: 4000, // How long each slide will show
+                startSlide: 0, // Set starting Slide (0 index)
+                directionNav: false, // Next & Prev navigation
+                controlNav: false, // 1,2,3... navigation
+                controlNavThumbs: false, // Use thumbnails for Control Nav
+                pauseOnHover: false // Stop animation while hovering
+            });
+        });
+    </script>
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/642a7e3d31ebfa0fe7f626d4/1gt2vq8t2';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+    <!--End of Tawk.to Script-->
+</body>

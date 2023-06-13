@@ -1,0 +1,13 @@
+﻿@using web3.Models;
+@model List<NXB>
+<link href="~/Content/TrangChuCss.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "NXBPartial";
+}
+@foreach (var items in Model)
+{
+    <div><a href="@Url.Action("SachTheoNXB", new {@MaNXB=items.IDNXB})">@items.TenNXB</a></div>
+}
+<div><a href="@Url.Action("DanhMucNXB")">NXB khac...</a></div>
+
+

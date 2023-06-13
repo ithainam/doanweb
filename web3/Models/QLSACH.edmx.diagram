@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2c87697ee1e34e08957085de0ae4aaf1" Name="Diagram1" ZoomLevel="88">
+        <EntityTypeShape EntityType="SachModel.C__MigrationHistory" Width="1.5" PointX="7.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="SachModel.AspNetRole" Width="1.5" PointX="6.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="SachModel.AspNetUserClaim" Width="1.5" PointX="10.25" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SachModel.AspNetUserLogin" Width="1.5" PointX="10.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="SachModel.AspNetUser" Width="1.5" PointX="8" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SachModel.Chapter" Width="1.5" PointX="8.875" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SachModel.ChuDe" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="SachModel.CTDH" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SachModel.DH" Width="1.5" PointX="3" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SachModel.KhachHang" Width="1.5" PointX="0.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SachModel.NXB" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SachModel.Sach" Width="1.5" PointX="3" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="SachModel.sysdiagram" Width="1.5" PointX="11.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="SachModel.TG" Width="1.5" PointX="3" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SachModel.ThamGIa" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SachModel.Trang" Width="1.5" PointX="11.625" PointY="4.875" IsExpanded="true" />
+        <AssociationConnector Association="SachModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="SachModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="SachModel.FK_Sach_ChuDe" ManuallyRouted="false" />
+        <AssociationConnector Association="SachModel.FK_CTDH_DH" ManuallyRouted="false" />
+        <AssociationConnector Association="SachModel.FK_CTDH_Sach" ManuallyRouted="false" />
+        <AssociationConnector Association="SachModel.FK_DH_KhachHang" ManuallyRouted="false" />
+        <AssociationConnector Association="SachModel.FK_Sach_NXB" ManuallyRouted="false" />
+        <AssociationConnector Association="SachModel.FK_ThamGIa_Sach" ManuallyRouted="false" />
+        <AssociationConnector Association="SachModel.FK_ThamGIa_TG" ManuallyRouted="false" />
+        <AssociationConnector Association="SachModel.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="SachModel.FK_Chapters_Sach" />
+        <AssociationConnector Association="SachModel.FK_Trangs_Chapters" ManuallyRouted="false" >
+        </AssociationConnector>
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

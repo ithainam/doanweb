@@ -1,0 +1,80 @@
+﻿@using WebsiteBanCoffee.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+
+}
+<div class="limiter">
+    <div class="container-login100" style="background-image: url('~/Content/Login/images/bg-01.jpg');">
+        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+        <div class="wrap-login100 p-t-30 p-b-50">
+            <span class="login100-form-title p-b-41">
+                Đăng Nhập
+            </span>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <form class="login100-form validate-form p-b-33 p-t-5">
+
+            <div class="wrap-input100 validate-input" data-validate="Enter username">
+                <div class="wrap-input100 validate-input" style="color: white">
+                    @Html.TextBoxFor(m => m.UserName, new { @class = "input100", placeholder = "Tài Khoản" })
+                    <span class="focus-input100" data-placeholder="&#xe82a;"></span>
+                </div>
+                @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="wrap-input100 validate-input" data-validate="Enter password">
+                <div class="wrap-input100 validate-input" data-validate="Password is required">
+                    @Html.PasswordFor(m => m.Password, new { @class = "input100", placeholder = "Mật Khẩu" })
+                    <span class="focus-input100" data-placeholder="&#xe80f;"></span>
+                </div>
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group d-md-flex">
+                <div class="w-50" style=" color: #fbceb5">
+                    @Html.CheckBoxFor(m => m.RememberMe)
+                    @Html.LabelFor(m => m.RememberMe)
+                </div>
+                <div class="w-50 text-md-right">
+                    <a href="#" style="color: #fff">@Html.ActionLink("Quên mật khẩu?", "ForgotPassword")</a>
+
+                </div>
+            </div>
+            <p>
+                @Html.ActionLink("Chưa có tài khoản !", "Register")
+            </p>         
+            <div class="container-login100-form-btn m-t-32">
+                <button class="login100-form-btn">
+                    Login
+                </button>
+            </div>          
+        </form>
+        </div>
+        }
+    </div>
+        
+</div>
+<div id="dropDownSelect1" style="background-color: #1b1e219c ">
+    <p class="w-100 text-center" style="font-weight: 800">&mdash; Đăng Nhập Bằng &mdash;</p>
+    <div>
+        <section>
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </section>
+    </div>
+</div>
+
+<script src="~/Content/Login/vendor/jquery/jquery-3.2.1.min.js"></script>
+<script src="~/Content/Login/vendor/animsition/js/animsition.min.js"></script>
+<script src="~/Content/Login/vendor/bootstrap/js/popper.js"></script>
+<script src="~/Content/Login/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="~/Content/Login/vendor/select2/select2.min.js"></script>
+<script src="~/Content/Login/vendor/daterangepicker/moment.min.js"></script>
+<script src="~/Content/Login/vendor/daterangepicker/daterangepicker.js"></script>
+<script src="~/Content/Login/vendor/countdowntime/countdowntime.js"></script>
+<script src="~/Content/Login/js/main.js"></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

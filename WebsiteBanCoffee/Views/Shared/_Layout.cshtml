@@ -1,0 +1,174 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <title>Hutech Coffee</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-lD9S1G13ygK7F2msmz1LL4s4ZKl4s7nddRtY/ewFBJyQ9k38J7V1zhq3uq7VZfNpZ0nW8bq3Yfm7fugI9Xn/rA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+    @* css - nav *@
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/Nav/css/style.css">
+
+    @* css - footer *@
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Serif+Pro:400,600&display=swap" rel="stylesheet">
+    <link href="~/Content/Footer/fonts/icomoon/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/Footer/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/Footer/css/style.css">
+
+    @* css - login *@
+    <link rel="icon" type="image/png" href="~/Content/Login/images/icons/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/vendor/animate/animate.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/vendor/css-hamburgers/hamburgers.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/vendor/animsition/css/animsition.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/vendor/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/vendor/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/css/util.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/Login/css/main.css">
+
+
+</head>
+<body style="background-image: url('../../content/css/assets/img/bg.jpg');">
+    <section class="ftco-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6 text-center mb-5">
+                    <h2 class="heading-section" style="color: rgb(217,230,24); font-weight:800 ">HUTECH COFFEE</h2>
+                </div>
+            </div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+            <div class="container-fluid">
+
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="fa fa-bars"></span> Menu
+                </button>
+                <div class="collapse navbar-collapse" id="ftco-nav">
+                    <ul class="navbar-nav m-auto">
+                        <li class="nav-item active">
+                            @Html.ActionLink("Trang Chủ", "Index", "Home", null, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Menu", "Index", "Product", null, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Thông Tin", "About", "Home", null, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Tin Tức", "Contact", "Home", null, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Hỗ Trợ ", "Contact", "Home", null, new { @class = "nav-link" })
+                        </li>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    @Html.ActionLink("Admin", "Index", "Admin", null, new { @class = "nav-link" })
+                                </li>
+                            }
+                        }
+                        <li class="nav-item">
+                            @if (Session["CountCart"] == null)
+                            {
+                                <a href="@Url.Action("Index", "Cart")" class="nav-link">
+                                    <i class="fa-sharp fa-light fa-cart-shopping"></i>
+                                    Giỏ Hàng [0]
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Index", "Cart")" class="nav-link">
+                                    <i class="fa-sharp fa-light fa-cart-shopping"></i>
+                                    Giỏ Hàng [@Session["CountCart"]]
+                                </a>
+                            }
+                        </li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </div>
+        </nav>
+        <!-- END nav -->
+    </section>
+
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    @*Footer*@
+    <footer class="footer-48201" style="margin-top:20px">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 pr-md-5">
+                    <a href="#" class="footer-site-logo d-block mb-4">Hutech Coffee</a>
+                    <p>Caffe sạch, coffee ngon. Chất lượng tạo nên thương hiệu.</p>
+                </div>
+                <div class="col-md">
+                    <ul class="list-unstyled nav-links">
+                        <li>
+                            @Html.ActionLink("Trang Chủ", "Index", "Home", null, new { @class = "nav-link" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Thông Tin", "About", "Home", null, new { @class = "nav-link" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Tin Tức", "Contact", "Home", null, new { @class = "nav-link" })
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md">
+                    <ul class="list-unstyled nav-links">
+                        <li><a href="#">Hutech</a></li>
+                        <li><a href="#">HutechCoffee</a></li>
+                        <li><a href="#">HutechIT</a></li>
+                    </ul>
+                </div>
+                <div class="col-md text-md-center">
+                    <ul class="social list-unstyled">
+                        <li><a href="https://www.instagram.com"><span class="icon-instagram"></span></a></li>
+                        <li><a href="https://twitter.com"><span class="icon-twitter"></span></a></li>
+                        <li><a href="https://www.facebook.com"><span class="icon-facebook"></span></a></li>
+                        <li><a href="https://www.pinterest.com"><span class="icon-pinterest"></span></a></li>
+                        <li><a href="https://dribbble.com"><span class="icon-dribbble"></span></a></li>
+                    </ul>
+                    <p class="">@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink"})</p>
+                </div>
+            </div>
+
+            <div class="row ">
+                <div class="col-12 text-center">
+                    <div class="copyright mt-5 pt-5">
+                        <p><small>Hutech Coffee.</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+    @* js - nav *@
+    <script src="~/Content/Nav/js/jquery.min.js"></script>
+    <script src="~/Content/Nav/js/popper.js"></script>
+    <script src="~/Content/Nav/js/bootstrap.min.js"></script>
+    <script src="~/Content/Nav/js/main.js"></script>
+
+    @* js - footer *@
+    <script src="~/Content/Footer/js/jquery-3.3.1.min.js"></script>
+    <script src="~/Content/Footer/js/popper.min.js"></script>
+    <script src="~/Content/Footer/js/bootstrap.min.js"></script>
+
+</body>
+</html>
+@RenderSection("Scripts", required: false)
+

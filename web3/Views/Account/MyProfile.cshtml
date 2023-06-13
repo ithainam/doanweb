@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "MyProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var User = Session["MyProfile"] as web3.Models.ApplicationUser;
+}
+
+<h2>MyProfile</h2>
+<ul>
+    <li>UserName: @User.UserName</li>
+    <li>Email: @User.Email</li>
+
+</ul>
+

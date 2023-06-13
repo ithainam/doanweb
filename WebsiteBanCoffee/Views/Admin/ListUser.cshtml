@@ -1,0 +1,95 @@
+﻿@model IEnumerable<WebsiteBanCoffee.Models.ApplicationUser>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ListOrder</title>
+</head>
+<body>
+    @Html.Partial("SideNavBar")
+    <div class="title-user">
+        Danh sách tài khoản
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <table class="table">
+            <tr>
+                <th>
+                    Tên khách hàng
+                </th>
+                <th>
+                    Tên đăng nhập
+                </th>
+                <th>
+                    Email
+                </th>
+                <th>
+                    Địa chỉ
+                </th>
+                <th>
+                    Số điện thoại
+                </th>
+                <th>
+                    Giới tính
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    @if (item.Gender)
+                    {
+                        <td>Nam</td>
+                    }
+                    else
+                    {
+                        <td>Nữ</td>
+
+                    }
+                </tr>
+            }
+
+        </table>
+    }
+</body>
+</html>
+
+<style>
+    table {
+        margin-top: 20px;
+    }
+
+    .btn-success {
+        margin-top: 10px;
+        margin-left: 670px;
+    }
+
+    .title-user {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+    }
+</style>

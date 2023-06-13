@@ -1,0 +1,50 @@
+﻿@model web3.Models.Trang
+
+@{
+    ViewBag.Title = "DeleteTrang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>DeleteTrang</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Trang</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Chapter.IDChapter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chapter.IDChapter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Image)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Image)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TSequence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TSequence)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "SuaChapters", new { id = Model.IDChapter })
+        </div>
+    }
+</div>

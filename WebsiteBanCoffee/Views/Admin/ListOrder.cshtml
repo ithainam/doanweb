@@ -1,0 +1,99 @@
+﻿@model IEnumerable<WebsiteBanCoffee.Models.Order>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ListOrder</title>
+</head>
+<body>
+    @Html.Partial("SideNavBar")
+    <div class="title-order">
+        Danh sách đơn đặt hàng
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <table class="table">
+            <tr>
+                <th>
+                    Tên khách hàng
+                </th>
+                <th>
+                    Ngày đặt hàng
+                </th>
+                <th>
+                    Chi tiết đơn hàng
+                </th>
+                <th>
+                    Thành tiền
+                </th>
+                <th>
+                    Trạng thái thanh toán
+                </th>
+                <th>
+                    Trạng thái đơn hàng
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApplicationUser.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderDate)
+                    </td>
+                    <td>
+                        @foreach (var details in ViewBag.OrderDetails)
+                        {
+                            if (details.OrderId == item.Id)
+                            {
+                                <span>@details.Product.name (@details.size) x @details.Count</span>
+                            }
+
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderTotal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaymentStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderStatus)
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary">Cập nhật</button>
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+</body>
+</html>
+
+<style>
+    table {
+        margin-top: 20px;
+    }
+
+    /*.btn-success {
+        margin-top: 10px;
+        margin-left: 670px;
+    }*/
+
+    .title-order {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+    }
+</style>

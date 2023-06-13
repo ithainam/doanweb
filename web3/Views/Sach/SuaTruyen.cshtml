@@ -1,0 +1,46 @@
+﻿@model IEnumerable<web3.Models.Chapter>
+
+@{
+    ViewBag.Title = "Sửa Truyện";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Sửa truyện</h2>
+
+
+<p>
+    @Html.ActionLink("Thêm chapter", "Create", new { id = Model.First().IDSach })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên Sách
+        </th>
+        <th>
+           Chapter
+        </th>
+        <th>
+        
+        </th>
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sach.TenSach)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CSequence)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa", "SuaChapters", new { id = item.IDChapter })
+            </td>
+            <td>
+                @Html.ActionLink("Thêm trang", "CreateTrang", new { id = Model.First().IDSach })
+            </td>
+        </tr>
+    }
+
+</table>

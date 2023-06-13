@@ -1,0 +1,10 @@
+﻿@using web3.Models;
+@model List<ChuDe>
+@{
+    ViewBag.Title = "ChuDePartial";
+}
+@foreach (var items in Model)
+{
+    <a href="@Url.Action("SachTheoChuDe",new {@MaChuDe=items.IDChuDe})" class="button button-submit">@items.TenChuDe</a>
+
+}

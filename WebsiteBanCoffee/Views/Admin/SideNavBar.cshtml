@@ -1,0 +1,166 @@
+﻿@using Microsoft.AspNet.Identity
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <title>Index</title>
+    @if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+        {
+            @Html.AntiForgeryToken()
+        }
+    }
+</head>
+<body>
+    <input class="input-sidenav" type="checkbox" name="a" id="check" />
+    <div class="sidenav">
+        <label for="check">
+            <span id="times"></span>
+            <span id="bars"></span>
+        </label>
+        <div class="head">HUTECH COFFEE</div>
+
+        @*@Html.ActionLink("Loại Sản phẩm", "ListCategory", "Admin")
+        @Html.ActionLink("Sản Phẩm", "ListProduct", "Admin")
+        @Html.ActionLink("Đơn Đặt Hàng", "ListOrder", "Admin")
+        @Html.ActionLink("Khách Hàng", "ListUser", "Admin")*@
+        @*<li class="nav-item">
+            @Html.ActionLink("View Role", "Index", "Role", null, new { @class = "nav-link" })
+        </li>
+        <li class="nav-item">
+            @Html.ActionLink("Assign Role", "RegisterRole", "Account", null, new { @class = "nav-link" })
+        </li>*@
+        <a href="@Url.Action("RegisterRole","Account")"><img src="~/Content/images/icons8-administrator-male-50.png" width=30px, height=30px class="icon-sidenav" />Gán Quyền</a>
+
+        <a href="@Url.Action("Index","Role")"><img src="~/Content/images/icons8-user-groups-50.png" width=30px, height=30px class="icon-sidenav" />Xem Các Quyền</a>
+
+        <a href="@Url.Action("ListCategory","Admin")"><img src="~/Content/images/icon5.jpg" width=30px, height=30px class="icon-sidenav" />Loại Sản Phẩm</a>
+        <a href="@Url.Action("ListProduct","Admin")"><img src="~/Content/images/icon1.png" width=30px, height=30px class="icon-sidenav" />Sản Phẩm</a>
+        <a href="@Url.Action("ListOrder","Admin")"><img src="~/Content/images/icon3.png" width=30px, height=30px class="icon-sidenav" />Đơn Đặt Hàng</a>
+        <a href="@Url.Action("ListUser","Admin")"><img src="~/Content/images/icon4.png" width=30px, height=30px class="icon-sidenav" />Tài Khoản</a>
+        @*using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "sidenav-bottom" }))*@
+        <a href="javascript:document.getElementById('logoutForm').submit()" class="btn btn-danger margin-logout">Log out</a>
+    </div>
+
+</body>
+</html>
+
+<style>
+    .navbar-right {
+        margin-right: 0px;
+    }
+
+    .margin-logout{
+        margin-bottom: 0px;
+    }
+    .icon-sidenav{
+        filter:grayscale(100%);
+    }
+
+    .shop-name{
+        text-align:center;
+        font-size: 22px;
+        color: peru;
+        height: 100px;
+    }
+
+    .sidenav {
+        height: 100%;
+        width: 250px;
+        position: absolute;
+        z-index: 1;
+        transition: 0.5s ease;
+        transform: translateX(-250px);
+        top: 0;
+        left: 0;
+        background-color: #f1f1f1;
+
+    }
+
+    .sidenav .head{
+        color: #fbfdce;
+        font-size: 30px;
+        font-weight: bold;
+        padding:30px;
+        text-transform:uppercase;
+        text-align: center;
+        letter-spacing: 3px;
+        background: linear-gradient(30deg, #df0155, #ed4901);
+    }
+
+    .input-sidenav{
+        -webkit-appearance: none;
+        visibility: hidden;
+        display: none;
+    }
+
+    div > label > span{
+        position: absolute;
+        right: -40px;
+        top: 30px;
+        font-size: 25px;
+        border-radius: 3px;
+        color: #fff;
+        padding: 3px 8px;
+        cursor: pointer;
+        background: #000;
+    }
+
+    #bars{
+        background: red;
+    }
+
+    #check:checked ~ .sidenav{
+        transform: translateX(0);
+    }
+
+        .sidenav a {
+            display: block;
+            color: black;
+            padding: 16px;
+            text-decoration: none;
+        }
+
+    .sidenav a.active {
+        background-color: #04AA6D;
+        color: white;
+    }
+
+            .sidenav a:hover:not(.active) {
+                background-color: #18cdca;
+                color: white;
+            }
+
+
+
+    div.content {
+        margin-left: 200px;
+        padding: 1px 16px;
+        height: 1000px;
+    }
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav-bottom{
+    margin-top:600px;
+}
+
+.main {
+  margin-left: 200px; /* Same as the width of the sidenav */
+}
+
+@*@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}*@
+</style>

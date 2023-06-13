@@ -1,0 +1,69 @@
+﻿@using web3.Models;
+@model List<GioHang>
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+<style>
+    #GH {
+        padding-left:20px;
+    }
+</style>
+
+<h2>Giỏ Hàng</h2>
+
+<table>
+    
+    <tr>
+
+        <td>Mã Sách    |</td>
+
+        <td>Tên Sách   |</td>
+
+        <td>Ảnh bìa    |</td>
+
+        <td>Đơn giá    |</td>
+
+        <td>Số lượng   |</td>
+        <td>
+            Chapter    |
+        </td>
+
+        <td>Thành Tiền    |</td>
+
+    </tr>
+    
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.iMaSach</td>
+
+            <td>@item.sTenSach</td>
+
+            <td><img src="@Url.Content("~/images2/"+item.sHinhAnh)" width="50" height="50" /></td>
+
+            <td>@item.dDonGia VND</td>
+
+            <td>@item.iSoLuong</td>
+
+            <td>@item.iCsequence</td>
+            <td>@item.ThanhTien VND</td>
+
+        </tr>
+        <tr>
+            <td colspan="6" style="text-align:right">
+                @Html.ActionLink("Edit Gio Hang", "SuaGioHang")
+            </td>
+        </tr>
+
+
+        <tr>
+            <td colspan="6" style="text-align:right">
+                @using (Html.BeginForm("DatHang", "GioHang"))
+                {
+                    <input type="submit" value="Đặt hàng" />
+                }
+            </td>
+        </tr>
+    }
+</table>

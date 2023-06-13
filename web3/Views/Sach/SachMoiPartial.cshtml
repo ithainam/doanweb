@@ -1,0 +1,26 @@
+﻿@using web3.Models;
+@model List<Sach>
+@{
+    ViewBag.Title = "SachMoiPartial";
+}
+<h1 class="item-header">New Manga</h1>
+@{
+    foreach (var item in Model)
+    {
+        <div class="activity-list-update">
+            <img src="@Url.Content("~/images2/"+item.AnhBia)" width="50" height="50" alt="Image">
+            @if (item.TenSach.Length > 30)
+            {
+                <p><strong title="@item.TenSach">TIeu DE:@item.Mota.Substring(0, 30)...</strong><br /><a href="@Url.Action("XemChiTiet", new {@masach=item.IDSach})">Xem Chi Tiet</a></p>
+            }
+            else
+            {
+                <p><strong title="@item.TenSach">TIeu DE:@item.Mota</strong><br /><a href="@Url.Action("XemChiTiet", new {@masach=item.IDSach})">Xem Chi Tiet</a></p>
+            }
+            <div class="clear"></div>
+        </div>
+    }
+}
+
+
+

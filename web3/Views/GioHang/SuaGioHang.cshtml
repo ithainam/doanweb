@@ -1,0 +1,48 @@
+﻿@using web3.Models;
+@model List<GioHang>
+@{
+    ViewBag.Title = "SuaGioHang";
+    Layout = "~/Views/Layout/NguoiDungLayout.cshtml";
+}
+<link href="~/Content/TrangChu.css" rel="stylesheet" />
+<h2>Giỏ Hàng</h2>
+
+<table>
+    <tr>
+        <td>Mã Sách </td>
+
+        <td>Tên Sách </td>
+
+        <td>Ảnh bìa </td>
+
+        <td>Đơn giá </td>
+
+        <td>Số lượng </td>
+
+        <td>Thành Tiền </td>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.iMaSach</td>
+
+            <td>@item.sTenSach</td>
+
+            <td><img src="@Url.Content("~/images2/"+item.sHinhAnh)" width="50" height="50" /></td>
+
+            <td>@item.dDonGia VND</td>
+            @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { @iMaSP = item.iMaSach }))
+            {
+                <td>@Html.TextBox("txtSoLuong", item.iSoLuong)</td>
+
+
+                <td>@item.ThanhTien VND</td>
+                <td><input type="submit" value="Cập nhật" /></td>
+
+                <td>@Html.ActionLink("Xóa", "XoaGioHang", new { @iMaSP = item.iMaSach })</td>
+            }
+            <td>
+            </td>
+        </tr>
+    }
+</table>

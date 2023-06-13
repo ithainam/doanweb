@@ -1,0 +1,25 @@
+﻿@model IEnumerable<web3.Models.Chapter>
+@{
+    ViewBag.Title = "XemTruyen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2>Chapter</h2>
+<div class="row">
+    <div class="caption">
+        @foreach (var item in Model.OrderByDescending(x => x.CSequence).ToList())
+        {
+            <div class="row">
+                <a href="@Url.Action("XemChapter","Sach",new {id=item.IDChapter})">Chapter: @item.CSequence</a>
+            </div>
+            <div id="GioHang">
+                @using (Html.BeginForm("ThemGioHang", "GioHang", new { @iMaSach = item.IDSach,@iCsequence=item.CSequence ,@strURL = Request.Url.ToString() }))
+                {
+                    <input type="submit" value="Mua" id="btnGioHang" class="btn btn-primary" />
+
+                }
+
+            </div>
+        }
+
+    </div>
+</div>

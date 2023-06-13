@@ -1,0 +1,151 @@
+﻿@model IEnumerable<WebsiteBanCoffee.Models.Category>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ListCategory</title>
+</head>
+<body>
+    <div class="title-cate">
+        Các loại sản phẩm
+    </div>
+    <a href="@Url.Action("CreateCategory","Admin")" class="btn btn-success">Thêm loại sản phẩm</a>
+
+    @Html.Partial("SideNavBar")
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.isLarge)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.isMedium)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.isSmall)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.bonusPrice)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.name)
+                    </td>
+                    <td>
+                        @if (item.isLarge)
+                        {
+                            <img src="~/Content/images/tick.jpg" width="30px" , height="30px" class="text-center" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/images/X.png" width="20px" , height="20px" class="text-center" />
+                        }
+                    </td>
+                    <td>
+                        @if (item.isMedium)
+                        {
+                            <img src="~/Content/images/tick.jpg" width="30px" , height="30px" class="text-center" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/images/X.png" width="20px" , height="20px" class="text-center" />
+                        }
+                    </td>
+                    <td>
+                        @if (item.isSmall)
+                        {
+                            <img src="~/Content/images/tick.jpg" width="30px" , height="30px" class="text-center" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/images/X.png" width="20px" , height="20px" class="text-center" />
+                        }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.bonusPrice) VNĐ
+                    </td>
+                    <td>
+                        @if (!item.isDisplay)
+                        {
+                            <button type="button" class="btn btn1" onclick="categoryDisplay(@item.Id)" id="btn_@item.Id">Hiển thị</button>
+                        }
+                        else
+                        {
+                            <button type="button" class="btn btn-danger" onclick="categoryDisplay(@item.Id)" id="btn_@item.Id">Ẩn</button>
+                        }
+                        @Html.ActionLink("Chỉnh sửa", "EditCategory", new { id = item.Id }, new { @class = "btn btn-primary" })
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+</body>
+</html>
+
+<style>
+    table {
+        margin-top: 20px;
+    }
+
+    .btn-success {
+        margin-top: 10px;
+        margin-left: 670px;
+    }
+
+    .title-cate {
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .btn1 {
+        background-color: green;
+        border-color: green;
+        color: white;
+    }
+
+        .btn1:hover {
+            background-color: darkgreen;
+            border-color: darkgreen;
+            color: white;
+        }
+</style>
+
+
+<script>
+    function categoryDisplay(btnId) {
+        var button = document.getElementById("btn_" + btnId);
+        if (button != null) {
+            if (button.classList.contains("btn-danger")) {
+                button.classList.remove("btn-danger");
+                button.classList.add("btn1");
+                button.innerText = "Hiển thị";
+            }
+            else {
+                button.classList.remove("btn1");
+                button.classList.add("btn-danger");
+                button.innerText = "Ẩn";
+            }
+        }
+        else {
+            alert("Thao tác thực hiện không thành công");
+        }
+    }
+</script>

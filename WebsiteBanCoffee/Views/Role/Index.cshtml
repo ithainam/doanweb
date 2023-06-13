@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+@{
+    ViewBag.Title = "Index";
+}
+<div class="section-padding" style="background-color:rgba(255,255,255,0.5)">
+    <h2>Quyền Có Sẵn</h2>
+    <br /><br />
+    <section class="col-sm-6">
+        <table class="table-bordered">
+            @Html.ActionLink("Thêm Quyền Truy Cập", "Create", "Role", new { @class = "btn btn-primary btn-sm btn-block" })
+        </table>
+    </section>
+    <br /><br />
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>Tên Quyền</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.Name</th>
+            </tr>
+        }
+    </table>
+
+
+</div>

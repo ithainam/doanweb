@@ -1,0 +1,42 @@
+﻿@model web3.Models.ChapterViewModel
+@{
+    ViewBag.Title = "XemChapter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    Chapter:@Model.CurrentCSequence
+</div>
+<div class="row">
+    @* Previous Button *@
+    @if (Model.CurrentCSequence <= 1)
+    {
+        <a class="PreviousButton" href="@Url.Action("XemTruyen", "Sach", new { id = Model.CurrentMangaID })">
+            Previous
+        </a>
+    }
+    else
+    {
+        <a href="@Url.Action("XemChapter", "Sach", new {id=Model.Chapters.Where(x=>x.CSequence==Model.CurrentCSequence-1).First().IDChapter})" class="PreviousButton">Next</a>
+    }
+    @*Next Button*@
+    @if (Model.CurrentCSequence >= Model.TotalChapters)
+    {
+        <a class="NextButton" href="@Url.Action("XemTruyen", "Home", new { id = Model.CurrentMangaID })">
+            Previous
+        </a>
+    }
+    else
+    {
+        <a href="@Url.Action("XemChapter", "Sach", new {id=Model.Chapters.Where(x=>x.CSequence==Model.CurrentCSequence+1).First().IDChapter})" class="PreviousButton">Next</a>
+    }
+</div>
+@{
+    int i = 1;
+    foreach (var item in Model.Trangs)
+    {
+        <div class="row">
+            <img src="/@item.Image" alt="@i" />
+        </div>
+        i = i + 1;
+    }
+}

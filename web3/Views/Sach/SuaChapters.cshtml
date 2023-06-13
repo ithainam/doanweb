@@ -1,0 +1,40 @@
+﻿@model IEnumerable<web3.Models.Trang>
+
+@{
+    ViewBag.Title = "Sửa Chapter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>SuaChapters</h2>
+
+<p>
+    @Html.ActionLink("Create New", "CreateTrang", new { id = Model.First().IDChapter })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            hình ảnh
+        </th>
+        <th>
+            trang
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TSequence)
+            </td>
+            <td>
+                @Html.ActionLink("Sửa Trang", "EditTrang", new { id = item.IDTrang }) |
+                @Html.ActionLink("Xóa Trang", "DeleteTrang", new { id = item.IDTrang })
+            </td>
+        </tr>
+    }
+
+</table>

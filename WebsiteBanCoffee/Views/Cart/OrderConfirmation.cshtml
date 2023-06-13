@@ -1,0 +1,38 @@
+﻿
+@model WebsiteBanCoffee.Models.ViewModels.ShoppingCartVM
+@{
+    ViewBag.Title = "OrderConfirmation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="background-color: rgba(255,255,255,0.85)">
+    <div class="row pt-4"
+         style="
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      ">
+        <div class="col-12 text-center"
+             style="
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+        ">
+            <h1 class="text-primary text-center">Order Placed Successfully!</h1>
+            Your Order Number is : @ViewBag.NumberOrder <br /><br />
+            <div>
+                <img src="https://img.freepik.com/premium-vector/congratulations-banner-template-with-balloons-confetti_619130-1027.jpg?size=626&ext=jpg"
+                     width="75%" />
+            </div>
+        </div>
+        <div class="col-12 text-center" style="color: rgb(173, 19, 216)">
+            <br />
+            Your order has been placed successfully! <br />
+        </div>
+        <div class="col-12 col-md-6 pb-1 my-5">
+            <h4>@Html.ActionLink("Back to Cart", "Index", "Cart", new { @class = "btn btn-success form-control", style = "height: 50px; line-height: 35px; background-color:#51df82 !important; font-weight: 700; font-size: 0.8em; color: #b52fff !important" })</h4>
+
+        </div>
+    </div>
+</div>

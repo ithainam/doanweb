@@ -1,0 +1,368 @@
+﻿@model WebsiteBanCoffee.Models.ShoppingCart
+
+@{
+    ViewBag.Title = "Details";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+
+<h2>Details</h2>
+<div style="background-color:rgba(255,255,255,0.85)">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <form method="post" action="/Home/Details/@Model.Product.Id">
+            @Html.Hidden("ProductId")
+            <div class="detail-product">
+                <div class="img-product">
+                    <figure class="hover-img">
+                        <img src="/@Model.Product.image"
+
+                             width="100%"
+                             style="margin: auto; border-radius: 10px" />
+                        <figcaption>
+                            <h3>
+                                @Model.Product.name <br />@*@Url.Content(Model.Product.image)*@
+
+                         
+                            </h3>
+                        </figcaption>
+                    </figure>
+                </div>
+                <div class="check-product">
+                    <div class="info-product">
+                        <div class="info-product-name">
+                            <div class="name-product">@Model.Product.name</div>
+                            <div class="name-category">@Model.Product.cate.name</div>
+                        </div>
+                        <div class="info-product-desc">
+                            @Html.Raw(Model.Product.description)
+                        </div>
+                        <div class="info-product-price">
+                            Price: @Model.Product.sellPrice.ToString() VND
+                        </div>
+                    </div>
+                    <div class="option">
+                        <div class="option-product mt-4" id="sizes">
+                            @if (ViewBag.ListSize.isSmall)
+                            {
+                                <div class="">
+                                    <label class="option-control">
+                                        <input type="radio" id="r1" name="SizeOfProduct" class="SizeOfProduct" value=1 checked />
+                                        Small<br />(+@ViewBag.PriceSmall VND)
+
+                                    </label>
+                                </div>
+                            }
+                            @if (ViewBag.ListSize.isMedium)
+                            {
+                                <div class="">
+                                    <label class="option-control">
+                                        <input type="radio" id="r2" name="SizeOfProduct" class="SizeOfProduct" value=2 checked />
+                                        Medium <br />(+@ViewBag.PriceMedium VND)
+
+                                    </label>
+                                </div>
+                            }
+                            @if (ViewBag.ListSize.isLarge)
+                            {
+                                <div class="">
+                                    <label class="option-control">
+                                        <input type="radio" id="r3" name="SizeOfProduct" class="SizeOfProduct" value=3 checked />
+                                        Large <br />(+@ViewBag.PriceLarge VND)
+
+                                    </label>
+                                </div>
+                            }
+                            @if (ViewBag.ListSize.isLarge == false && ViewBag.ListSize.isSmall == false && ViewBag.ListSize.isMedium == false)
+                            {
+                                <div class="" style="display: none">
+                                    <label class="option-control">
+                                        <input type="radio" id="r3" name="SizeOfProduct" class="SizeOfProduct" value=0 checked />
+                                        Special <br />(+0 VND)
+
+                                    </label>
+                                </div>
+                            }
+                            <input id="results" hidden style="display: none" name="SizePriceOfProduct" value=@ViewBag.PriceLarge />
+                        </div>
+                        <div class="option-quantity">
+                            <p>Quantity:</p>
+                            <input type="number"
+                                   name="Count"
+                                   value="@Model.Count"
+                                   min="0"
+                                   oninput="validity.valid||(value='');"
+                                   style="max-width: 120px;margin: auto; font-size: 1.4em;line-height: 1.6em;text-align: center" />
+                        </div>
+                        <div class="" style="display: flex; justify-content: center">
+                            <button class="button-grow" onclick="savePriceSize()" type="submit">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    }
+
+    <h4 style="margin-top: 1em;">@Html.ActionLink("Back to Home", "Index", "Home", new { @class = "btn btn-success form-control", style = "height: 50px; line-height: 35px;    background-color: #2ae9b2 !important; font-weight: 900; color: #ec3e9c !important;font-size: 0.9em;" })</h4>
+</div>
+
+<script>
+    function savePriceSize() {
+
+        var getSelectedValue1 = document.querySelector('input[id="r1"]:checked');
+        if (getSelectedValue1 != null) {
+            document.getElementById('results').value = @ViewBag.PriceSmall;
+        }
+
+        var getSelectedValue2 = document.querySelector('input[id="r2"]:checked');
+        if (getSelectedValue2 != null) {
+            document.getElementById('results').value = @ViewBag.PriceMedium;
+        }
+
+        var getSelectedValue3 = document.querySelector('input[id="r3"]:checked');
+        if (getSelectedValue3 != null) {
+            document.getElementById('results').value = @ViewBag.PriceLarge;
+        }
+
+    }
+
+</script>
+
+<style>
+    .detail-product {
+        display: flex;
+        justify-content: space-around;
+        width: 75%;
+        min-height: 70vh;
+        margin: auto;
+    }
+
+    .img-product {
+        width: 50%;
+        margin: auto;
+    }
+
+    .check-product {
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .name-product {
+        margin-bottom: 10px;
+        font-size: 2rem;
+        font-weight: 700;
+        color: rgb(15, 151, 249);
+        transition: all 300ms ease;
+    }
+
+    .name-category {
+        margin-bottom: 10px;
+        font-size: 1.3rem;
+        font-weight: 300;
+        color: rgb(222, 15, 249);
+    }
+
+    .info-product {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 50%;
+    }
+
+    .info-product-desc {
+        line-height: 1.4em;
+        font-size: 1em;
+        color: rgb(70, 63, 63);
+    }
+
+    .option {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+
+    .option-quantity {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        margin-bottom: 2em;
+    }
+
+        .option-quantity > p {
+            font-size: 1.4em;
+            line-height: 1.6em;
+            color: rgb(4, 212, 143);
+            font-weight: 800;
+            width: 50%;
+            text-align: center;
+        }
+
+    .option-product {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        margin-bottom: 2em;
+    }
+
+    .info-product-price {
+        font-size: 1.4em;
+        font-weight: 600;
+        color: crimson;
+        text-align: center;
+        margin: 2em;
+    }
+
+    .button-grow {
+        color: #0b88ef;
+        width: 150px;
+        height: 40px;
+        font-weight: 600;
+        background-color: transparent;
+        border: 1px solid #198ff0;
+        border-radius: 4px;
+        padding: 0 16px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+    }
+
+        .button-grow:hover {
+            transform: scale(1.1);
+        }
+
+    .hover-img {
+        background-color: #fff;
+        color: #fff;
+        display: inline-block;
+        margin: 8px;
+        max-width: 320px;
+        min-width: 240px;
+        overflow: hidden;
+        position: relative;
+        text-align: center;
+        width: 100%;
+    }
+
+        .hover-img * {
+            box-sizing: border-box;
+            transition: all 0.45s ease;
+        }
+
+        .hover-img::before,
+        .hover-img::after {
+            background-color: rgba(0, 0, 0, 0.5);
+            border-top: 32px solid rgba(0, 0, 0, 0.5);
+            border-bottom: 32px solid rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            content: '';
+            transition: all 0.3s ease;
+            z-index: 1;
+            opacity: 0;
+            transform: scaleY(2);
+        }
+
+        .hover-img img {
+            vertical-align: top;
+            max-width: 100%;
+            backface-visibility: hidden;
+        }
+
+        .hover-img figcaption {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            align-items: center;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: 1.1em;
+            opacity: 0;
+            z-index: 2;
+            transition-delay: 0.1s;
+            font-size: 24px;
+            font-family: sans-serif;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hover-img:hover::before,
+        .hover-img:hover::after {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        .hover-img:hover > img {
+            opacity: 0.7;
+        }
+
+        .hover-img:hover figcaption {
+            opacity: 1;
+        }
+
+    .SizeOfProduct {
+        -webkit-appearance: none;
+        appearance: none;
+        background-color: var(--form-background);
+        margin: 0;
+        font: inherit;
+        color: currentColor;
+        width: 1.15em;
+        height: 1.15em;
+        border: 0.15em solid currentColor;
+        border-radius: 50%;
+        transform: translateY(-0.075em);
+        display: grid;
+        place-content: center;
+    }
+
+        .SizeOfProduct::before {
+            content: '';
+            width: 0.65em;
+            height: 0.65em;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            box-shadow: inset 1em 1em rgb(182, 255, 0);
+            background-color: green;
+        }
+
+        .SizeOfProduct:checked::before {
+            transform: scale(1);
+        }
+
+        .SizeOfProduct:focus {
+            outline: max(2px, 0.15em) solid currentColor;
+            outline-offset: max(2px, 0.15em);
+        }
+
+
+    .option-control {
+        font-family: system-ui, sans-serif;
+        font-size: 0.8em;
+        font-weight: normal;
+        line-height: 1.1;
+        display: grid;
+        grid-template-columns: 2em auto;
+        gap: 0.5em;
+    }
+
+        .option-control + .option-control {
+            margin-top: 1em;
+        }
+
+        .option-control:focus-within {
+            color: var(--form-control-color);
+        }
+</style>
